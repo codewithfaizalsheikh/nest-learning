@@ -2,12 +2,14 @@ import { Injectable } from '@nestjs/common';
 import { CreateBookDto } from './dto/create-book.dto';
 import { UpdateBookDto } from './dto/update-book.dto';
 import { threadId } from 'worker_threads';
+import { v4 as uuidv4 } from 'uuid';
 
 @Injectable()
 export class BookService {
   public books:CreateBookDto [] = [];
 
   addBook(book:CreateBookDto) : string{
+    book.id = uuidv4();
     this.books.push(book);
     return "book has been added";
   }
